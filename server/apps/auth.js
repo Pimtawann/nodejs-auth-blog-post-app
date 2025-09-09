@@ -23,7 +23,7 @@ authRouter.post("/register", async (req, res) => {
 })
 
     authRouter.post("/login", async (req, res) => {
-        const user = await db.collection("users").findOne({});
+        const user = await db.collection("users").findOne({username: req.body.username});
 
         if (!user) {
             return res.status(404).json({
@@ -43,10 +43,10 @@ authRouter.post("/register", async (req, res) => {
         }
 
         const token = jwt.sign(
-            { id: user._id, firstName: user.firstName, lastName: user.lastName},
+            { id: user._id, firstname: user.firstname, lastname: user.lastname},
             process.env.SECRET_KEY,
             {
-                expiresIn: "900000",
+                expiresIn: "15m",
             }
         );
 
