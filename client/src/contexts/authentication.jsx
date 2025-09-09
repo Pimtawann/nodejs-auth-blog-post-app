@@ -42,6 +42,7 @@ function AuthProvider(props) {
     //  ให้เขียน Logic ของ Function `logout` ตรงนี้
     //  Function logout ทำหน้าที่ในการลบ JWT Token ออกจาก Local Storage
     localStorage.removeItem("token");
+    setState({ ...state, user: null, error: null })
     navigate("/login");
   };
 
